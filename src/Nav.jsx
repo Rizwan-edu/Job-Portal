@@ -5,21 +5,21 @@ import { Link } from 'react-router-dom'; // Import Link
 function Nav() {
   return (
     <>
-      <nav className="flex justify-between items-center p-4 bg-[#0065F8]">
+      <nav className="flex justify-between items-center p-4 bg-[#030303]">
         <Link to="/Home">
         <div className="text-3xl font-bold text-amber-50 ">
-          JOB PORTAL
+          Jobsy.com
         </div>
         </Link>
-        <div>
+        <div className='flex gap-3'>
           {/* Wrap the Button with Link and set the 'to' prop */}
           <Link to="/login" style={{ textDecoration: 'none' }}>
-            <Button style={{ color: 'white' }}>
+           <Button variant="contained" color="info">
               Login
             </Button>
           </Link>
-          <Link to="/signup" style={{ textDecoration: 'none' }}>
-          <Button style={{ textDecoration: 'none', color: 'white' }}>
+          <Link to="/signup" style={{ textDecoration: 'Add' }}>
+        <Button variant="contained" color="info">
             Signup
           </Button>
           </Link>
