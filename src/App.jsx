@@ -1,15 +1,15 @@
 import React, { useState, useEffect, createContext, useContext, useRef } from 'react';
 
-// --- Auth Context and Provider (No Firebase) ---
+
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [userId, setUserId] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
-    const [loadingAuth, setLoadingAuth] = useState(false); // No async loading for simple auth
+    const [loadingAuth, setLoadingAuth] = useState(false); 
 
-    // Simulate persistent login for demonstration (optional)
+    
     useEffect(() => {
         const storedUser = localStorage.getItem('currentUser');
         const storedUserId = localStorage.getItem('userId');
@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (email, password) => {
-        // Simple mock authentication
+       
         if (email === 'admin@jobsy.com' && password === 'password123') { // Updated admin email
             setCurrentUser({ email: 'admin@jobsy.com' });
             setUserId('admin-id-123');
@@ -70,27 +70,25 @@ const AuthProvider = ({ children }) => {
     );
 };
 
-// --- Data Context and Provider (No Firebase) ---
-// This context will manage all job and application data in-memory
+
 const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
-    // Initial dummy data for jobs - Increased job offers
+    
     const [jobs, setJobs] = useState([
-        { id: 'job1', title: 'Senior React Developer', description: 'Experienced React dev for challenging projects. Build scalable web applications.', requirements: '5+ years React, Redux, Node.js, GraphQL', location: 'Remote', salary: '$120,000 - $150,000', jobType: 'Full-time', createdAt: new Date('2024-01-15T10:00:00Z') },
-        { id: 'job2', title: 'UI/UX Designer', description: 'Creative designer with a passion for user-centered design. Develop intuitive interfaces.', requirements: 'Portfolio, Figma, Adobe XD, Prototyping', location: 'New York', salary: '$80,000 - $100,000', jobType: 'Full-time', createdAt: new Date('2024-01-20T11:30:00Z') },
-        { id: 'job3', title: 'Part-time Content Writer', description: 'Write engaging content for our blog and social media. Research industry trends.', requirements: 'Excellent writing skills, SEO knowledge, HubSpot', location: 'Remote', salary: '$30 - $40/hour', jobType: 'Part-time', createdAt: new Date('2024-02-01T09:00:00Z') },
-        { id: 'job4', title: 'Data Scientist Intern', description: 'Assist in data analysis and model building. Work with large datasets.', requirements: 'Python, SQL, basic ML knowledge, Statistics', location: 'Bangalore', salary: '$2,000/month', jobType: 'Internship', createdAt: new Date('2024-02-10T14:15:00Z') },
-        { id: 'job5', title: 'Senior Backend Engineer (Node.js)', description: 'Design and implement robust backend services and APIs.', requirements: '7+ years Node.js, Express, MongoDB, AWS', location: 'London', salary: '$130,000 - $160,000', jobType: 'Full-time', createdAt: new Date('2024-02-20T16:00:00Z') },
-        { id: 'job6', title: 'Mobile App Developer (Flutter)', description: 'Develop cross-platform mobile applications for iOS and Android.', requirements: '3+ years Flutter, Dart, Firebase, REST APIs', location: 'Berlin', salary: '$90,000 - $110,000', jobType: 'Full-time', createdAt: new Date('2024-03-01T10:45:00Z') },
-        { id: 'job7', title: 'Product Manager', description: 'Define product vision, strategy, and roadmap. Work closely with engineering and design.', requirements: '5+ years Product Management, Agile, SaaS experience', location: 'San Francisco', salary: '$140,000 - $170,000', jobType: 'Full-time', createdAt: new Date('2024-03-10T13:00:00Z') },
-        { id: 'job8', title: 'DevOps Engineer', description: 'Automate deployment, scaling, and management of applications.', requirements: 'Kubernetes, Docker, CI/CD, Azure/GCP', location: 'Remote', salary: '$110,000 - $140,000', jobType: 'Full-time', createdAt: new Date('2024-03-15T09:30:00Z') },
-        { id: 'job9', title: 'Digital Marketing Specialist', description: 'Plan and execute all digital marketing, including SEO/SEM, email, social media.', requirements: '3+ years Digital Marketing, Google Analytics, Content Strategy', location: 'Sydney', salary: '$75,000 - $95,000', jobType: 'Full-time', createdAt: new Date('2024-04-01T11:00:00Z') },
-        { id: 'job10', title: 'Customer Support Representative', description: 'Provide excellent customer service and technical support to users.', requirements: 'Strong communication skills, problem-solving, empathy', location: 'Dublin', salary: '$40,000 - $50,000', jobType: 'Full-time', createdAt: new Date('2024-04-05T14:00:00Z') },
+        { id: 'job1', title: 'Senior React Developer', description: 'Experienced React dev for challenging projects. Build scalable web applications.', requirements: '5+ years React, Redux, Node.js, GraphQL', location: 'Work From Home', salary: 'Rs.120,000 - 150,000', jobType: 'Full-time', createdAt: new Date('2024-01-15T10:00:00Z') },
+        { id: 'job2', title: 'UI/UX Designer', description: 'Creative designer with a passion for user-centered design. Develop intuitive interfaces.', requirements: 'Portfolio, Figma, Adobe XD, Prototyping', location: 'Mumbai', salary: 'Rs.80,000 -100,000', jobType: 'Full-time', createdAt: new Date('2024-01-20T11:30:00Z') },
+        { id: 'job3', title: 'Part-time Content Writer', description: 'Write engaging content for our blog and social media. Research industry trends.', requirements: 'Excellent writing skills, SEO knowledge, HubSpot', location: 'Banglore', salary: 'Rs.60,000 -80,000', jobType: 'Part-time', createdAt: new Date('2024-02-01T09:00:00Z') },
+        { id: 'job4', title: 'Data Scientist Intern', description: 'Assist in data analysis and model building. Work with large datasets.', requirements: 'Python, SQL, basic ML knowledge, Statistics', location: 'Goa', salary: 'Rs.10000(As Stipend)', jobType: 'Internship', createdAt: new Date('2024-02-10T14:15:00Z') },
+        { id: 'job5', title: 'Senior Backend Engineer (Node.js)', description: 'Design and implement robust backend services and APIs.', requirements: '7+ years Node.js, Express, MongoDB, AWS', location: 'Kochi', salary: 'Rs.80,000 -100,000', jobType: 'Full-time', createdAt: new Date('2024-02-20T16:00:00Z') },
+        { id: 'job6', title: 'Mobile App Developer (Flutter)', description: 'Develop cross-platform mobile applications for iOS and Android.', requirements: '3+ years Flutter, Dart, Firebase, REST APIs', location: 'Ernakulam', salary: 'Rs.80,000 -100,000', jobType: 'Full-time', createdAt: new Date('2024-03-01T10:45:00Z') },
+        { id: 'job7', title: 'Product Manager', description: 'Define product vision, strategy, and roadmap. Work closely with engineering and design.', requirements: '5+ years Product Management, Agile, SaaS experience', location: 'New Delhi', salary: 'Rs.80,000 -120,000', jobType: 'Full-time', createdAt: new Date('2024-03-10T13:00:00Z') },
+        { id: 'job8', title: 'DevOps Engineer', description: 'Automate deployment, scaling, and management of applications.', requirements: 'Kubernetes, Docker, CI/CD, Azure/GCP', location: 'Work From Home', salary: 'Rs.80,000 -150,000', jobType: 'Full-time', createdAt: new Date('2024-03-15T09:30:00Z') },
+        { id: 'job9', title: 'Digital Marketing Specialist', description: 'Plan and execute all digital marketing, including SEO/SEM, email, social media.', requirements: '3+ years Digital Marketing, Google Analytics, Content Strategy', location: 'Punjab', salary: 'Not Disclosed', jobType: 'Full-time', createdAt: new Date('2024-04-01T11:00:00Z') },
+        { id: 'job10', title: 'Customer Support Representative', description: 'Provide excellent customer service and technical support to users.', requirements: 'Strong communication skills, problem-solving, empathy', location: 'Kerala', salary: 'Rs.80,000 -200,000', jobType: 'Full-time', createdAt: new Date('2024-04-05T14:00:00Z') },
     ]);
 
-    // In-memory storage for applications
-    // Structure: { id: string, jobId: string, jobTitle: string, userId: string, userEmail: string, appliedAt: Date }
+    
     const [applications, setApplications] = useState([]);
 
     const addJob = (newJob) => {
@@ -121,7 +119,7 @@ const DataProvider = ({ children }) => {
             jobTitle: job.title,
             userId: userId,
             userEmail: userEmail,
-            appliedAt: new Date()
+            // appliedAt: new Date()
         };
         setApplications(prevApps => [...prevApps, newApplication]);
         return { success: true, message: `Successfully applied for "${job.title}"!` };
@@ -171,9 +169,9 @@ const Navbar = ({ navigate }) => {
     const { currentUser, isAdmin, logout, userId } = useContext(AuthContext);
 
     return (
-        <nav className="bg-[#212121] p-4 shadow-lg rounded-b-xl mb-6 text-gray-100"> {/* Primary Dark Color */}
+        <nav className="bg-[#190303] p-4 shadow-lg rounded-b-xl mb-6 text-gray-100"> {/* Primary Dark Color */}
             <div className="container mx-auto flex justify-between items-center flex-wrap">
-                <div className="text-[#004D40] text-2xl font-bold rounded-md px-3 py-1 bg-opacity-20 bg-white"> {/* Secondary Dark Accent */}
+                <div className="text-[#ffffff] text-2xl font-bold rounded-md px-3 py-1 bg-opacity-20 bg-black"> {/* Secondary Dark Accent */}
                     Jobsy.com
                 </div>
                 <div className="flex-grow flex justify-center mt-2 md:mt-0">
@@ -233,11 +231,11 @@ const NavLink = ({ onClick, children }) => (
 // --- Home Page ---
 const HomePage = ({ navigate }) => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] bg-[#212121] text-gray-100 rounded-xl p-8 shadow-inner"> {/* Primary Dark Color */}
-            <h1 className="text-5xl font-extrabold text-gray-100 mb-6 text-center leading-tight">
-                Welcome to <span className="text-[#004D40]">Jobsy.com</span>
+        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] bg-[#fefefe] text-gray-100 rounded-xl p-8 shadow-inner"> {/* Primary Dark Color */}
+            <h1 className="text-5xl font-extrabold text-[#0f0f0f] mb-6 text-center leading-tight">
+                Welcome to <span className="text-[#0f0f0f]">Jobsy.com</span>
             </h1>
-            <p className="text-xl text-gray-300 mb-8 text-center max-w-2xl">
+            <p className="text-xl text-[#0f0f0f] mb-8 text-center max-w-2xl">
                 Discover exciting career opportunities and take the next step in your professional journey.
             </p>
             <div className="flex space-x-6 mb-12">
@@ -257,19 +255,19 @@ const HomePage = ({ navigate }) => {
 
             {/* Section for company features */}
             <div className="w-full max-w-4xl text-center">
-                <h2 className="text-3xl font-bold text-gray-100 mb-6">Why Choose Jobsy.com?</h2>
+                <h2 className="text-3xl font-bold text-[#0f0f0f] mb-6">Why Choose Jobsy.com?</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                    <div className="bg-[#333333] p-6 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center"> {/* Slightly lighter dark background for cards */}
-                        <span className="text-5xl mb-4 text-[#004D40]">🚀</span> {/* Secondary Dark Accent */}
-                        <h3 className="text-xl font-semibold text-gray-100 mb-2">Fast & Easy Applications</h3>
+                    <div className="bg-[#a00eef] p-6 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center"> {/* Slightly lighter dark background for cards */}
+                        <span className="text-5xl mb-4 text-[#ffffff]">🚀</span> {/* Secondary Dark Accent */}
+                        <h3 className="text-xl font-semibold text-amber-50 mb-2">Fast & Easy Applications</h3>
                         <p className="text-gray-300">Apply to your dream jobs in just a few clicks. Our streamlined process saves you time.</p>
                     </div>
-                    <div className="bg-[#333333] p-6 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
+                    <div className="bg-[#a00eef] p-6 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
                         <span className="text-5xl mb-4 text-[#004D40]">🎯</span> {/* Secondary Dark Accent */}
                         <h3 className="text-xl font-semibold text-gray-100 mb-2">Personalized Job Matches</h3>
                         <p className="text-gray-300">Get recommendations tailored to your skills, experience, and preferences.</p>
                     </div>
-                    <div className="bg-[#333333] p-6 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
+                    <div className="bg-[#a00eef] p-6 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
                         <span className="text-5xl mb-4 text-[#004D40]">💼</span> {/* Secondary Dark Accent */}
                         <h3 className="text-xl font-semibold text-gray-100 mb-2">Diverse Opportunities</h3>
                         <p className="text-gray-300">Explore a wide range of jobs from top companies across various industries.</p>
@@ -306,19 +304,19 @@ const LoginPage = ({ navigate }) => {
     const closeMessage = () => setMessage(null);
 
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-120px)] bg-[#1A1A1A] p-4"> {/* Overall body background */}
+        <div className="flex items-center justify-center min-h-[calc(100vh-120px)] bg-[#000000] p-4"> {/* Overall body background */}
             <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-200">
                 <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-8">Login</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email address</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-black mb-2">Email address</label>
                         <input
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-lg"
+                            className="w-full px-4 py-3 border-amber-950 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-black"
                             placeholder="you@example.com"
                         />
                     </div>
@@ -330,8 +328,8 @@ const LoginPage = ({ navigate }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-lg"
-                            placeholder="********"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-black"
+                            placeholder="Enter Your password"
                         />
                     </div>
                     <button
@@ -393,7 +391,7 @@ const SignupPage = ({ navigate }) => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-lg"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-black"
                             placeholder="you@example.com"
                         />
                     </div>
@@ -405,8 +403,8 @@ const SignupPage = ({ navigate }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-lg"
-                            placeholder="********"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#004D40] focus:border-[#004D40] transition duration-200 text-black"
+                            placeholder="Enter Your Password"
                         />
                     </div>
                     <button
@@ -448,7 +446,7 @@ const UserDashboard = ({ navigate }) => {
     return (
         <div className="flex flex-col items-center justify-start min-h-[calc(100vh-120px)] p-6 bg-[#212121] text-gray-100 rounded-xl shadow-lg"> {/* Primary Dark Color */}
             <h1 className="text-4xl font-extrabold text-gray-100 mb-6 text-center">
-                Welcome, <span className="text-[#004D40]">{currentUser.email}!</span>
+                Welcome, <span className="text-[#ffffff]">{currentUser.email}!</span>
             </h1>
             <p className="text-lg text-gray-300 mb-8 text-center max-w-2xl">
                 Your user ID: <span className="font-mono bg-gray-700 px-2 py-1 rounded text-sm break-all">{userId}</span>
@@ -485,7 +483,7 @@ const JobCard = ({ job, onApply, onEdit, onDelete, isAdmin, userAppliedJobIds })
                 <h3 className="text-2xl font-bold text-gray-100 mb-2">{job.title}</h3>
                 <p className="text-gray-300 mb-3 text-sm flex items-center">
                     <svg className="w-4 h-4 mr-1 text-[#004D40]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
-                    {job.location} | <span className="ml-1 font-semibold text-[#004D40]">{job.jobType}</span> {/* Secondary Dark Accent */}
+                    {job.location} | <span className="ml-1 font-semibold text-[#fdffff]">{job.jobType}</span> {/* Secondary Dark Accent */}
                 </p>
                 <p className="text-gray-300 mb-4">{job.description}</p>
                 <p className="text-gray-300 mb-4 font-semibold">Requirements: <span className="font-normal">{job.requirements}</span></p>
@@ -682,7 +680,7 @@ const AppliedJobsPage = ({ navigate }) => {
                                     hour: '2-digit', minute: '2-digit'
                                 }) : 'N/A'}
                             </p>
-                            <p className="text-[#004D40] font-semibold mt-4">Status: Pending Review</p> {/* Secondary Dark Accent */}
+                            <p className="text-[#ffffff] font-semibold mt-4">Status: Pending Review</p> {/* Secondary Dark Accent */}
                         </div>
                     ))}
                 </div>
